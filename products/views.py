@@ -1,3 +1,4 @@
+from django.core import serializers
 from django.shortcuts import render
 from django.http import JsonResponse
 from products.models import *
@@ -40,3 +41,12 @@ def create_product(request):
         # if the request is a GET request, then we need to return the form
         form = ProductForm()
         return render(request, 'products/create-product.html', {'form': form})
+    
+
+def get_all_products_json(request):
+    # get all products from the database
+    products = Product.objects.all()
+    # serialize the data
+    json_data = serializers.serialize('json', products)
+    # return the data as a JSON response
+    return JsonResponse({'results': json_data}, safe=False)

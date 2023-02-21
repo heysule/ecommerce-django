@@ -1,5 +1,6 @@
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
+from django.contrib.auth.models import User
 
 def login(request):
     return HttpResponse('<h1>Login Successful</h1>')
